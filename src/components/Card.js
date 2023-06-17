@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Card(props) {
-    console.log(props.input)
+  
   return<>
    <div className="col-xl-3 col-md-6 mb-4">
                 <div className={`card border-left-${props.input.color} shadow h-100 py-2`}>
@@ -10,10 +10,10 @@ function Card(props) {
                             <div className="col mr-2">
                                 <div className={`text-xs font-weight-bold text-${props.input.color} text-uppercase mb-1`}>
                                     {props.input.tittle}</div>
-                                {!props.input.isProgress?<div className="h5 mb-0 font-weight-bold text-gray-800">{props.input.value}
+                                {!props.input.isProgress?<div className="h5 mb-0 font-weight-bold text-gray-800" >{props.input.value}
                                 </div>:<div className="row no-gutters align-items-center">
                                                 <div className="col-auto">
-                                                    <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">{props.input.value}</div>
+                                                    <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800" style={{marginLeft:"13px"}}>{props.input.value}</div>
                                                 </div>
                                                 <div className="col">
                                                     <div className="progress progress-sm mr-2">

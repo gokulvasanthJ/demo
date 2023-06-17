@@ -1,8 +1,13 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Card from './Card'
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
-function Dashboard() {
-  let data=[
+function Dashboard({users,setUsers}) {
+  let navigate = useNavigate()
+  
+  let [data,setData]=useState([
     { tittle:"Earning(Monthly)",
     value:"$40,000",
     color:"primary",
@@ -12,7 +17,7 @@ function Dashboard() {
    { tittle:"Earning(Annual)",
     value:"$60,000",
     color:"success",
-    icon:"dollar-sign",
+    icon:"dollar-sign",       
     isProgress:false
    },
    { tittle:"Task",
@@ -27,8 +32,8 @@ function Dashboard() {
     icon:"comments",
     isProgress:false
    }
-     ]
-  return <>
+  ]) 
+   return <>
   <div id="content-wrapper" className="d-flex flex-column">
 
 {/* <!-- Main Content --> */}
@@ -42,7 +47,7 @@ function Dashboard() {
         {/* <!-- Page Heading --> */}
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            <a href="javascript(void)" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     className="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
         </div>
 
@@ -52,14 +57,55 @@ function Dashboard() {
         {
            data.map((e,i)=>{
             return <Card key={i}
-            input={e}/>
+            input={e}
+           />
            })
             
            }
            
         </div>
-    
+    <div>
+      <div className="container-fluid">
+        <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>S:NO</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Dob</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+       {
+       users.map((e,i)=>{
+           return <tr key={i}>
+           <td>{i+1}</td>
+           <td>{e.name}</td>
+           <td>{e.email}</td>
+           <td>{e.mobile}</td>
+           <td>{e.dob}</td>
+           
+           <td>
+            <Button variant='primary' onClick={()=>navigate(`/edit-user/${i}`)}>Edit</Button>
+            &nbsp;&nbsp;
+            <Button variant='danger' onClick={()=>{
+              let newArray=[...users]
+              newArray.splice(i,1)
+              setUsers(newArray)
+            }}>Delete</Button>
+           </td>
+           </tr>
+            
+       })
 
+       }
+
+      </tbody>
+    </Table>
+    </div>
+    </div>
 </div>
 
 
