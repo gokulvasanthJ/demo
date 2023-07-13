@@ -1,11 +1,14 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useState,useEffect } from 'react';
+import { useState,useEffect ,useContext} from 'react';
 import { useNavigate ,useParams} from 'react-router-dom';
+import { UsersContext } from '../App';
 
 
-function AddUser({users,setUsers}) {
+function AddUser() {
+  let userContext=useContext(UsersContext)
+  console.log('Context',userContext)
 
   let navigate = useNavigate()
   let params = useParams()
@@ -15,14 +18,14 @@ function AddUser({users,setUsers}) {
   let [email,setEmail]=useState("")
   let [mobile,setMobile]=useState("")
   let [dob,setDob]=useState("")
-
+  
   let handleSubmit=()=>{
     let newUser={name,email,mobile,dob}
-    let newArray=[...users]
+    let newArray=[...userContext.users]
    {if(params.id!==undefined)
    {newArray.splice(params.id,1,newUser)}
    else{newArray.push(newUser)}}
-   setUsers(newArray)
+   userContext.setUsers(newArray)
     navigate('/dashboard')
   }
 //useEffect:
@@ -42,10 +45,10 @@ function AddUser({users,setUsers}) {
 
 useEffect(()=>{
   if(params.id!==undefined){
-    setName(users[params.id].name)
-    setEmail(users[params.id].email)
-    setMobile(users[params.id].mobile)
-    setDob(users[params.id].dob)
+    setEmail(userContext.users[params.id].email)
+    setMobile(userContext.users[params.id].mobile)
+    setDob(userContext.users[params.id].dob)
+    setName(userContext.users[params.id].name)
  }
   else{
     setName("")
@@ -60,24 +63,24 @@ useEffect(()=>{
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter Name" value ={name} onChange={(e)=>setName(e.target.value)} />        
+        <Form.Control type="text" placeholder="Enter Name" value ={name} onChange={(e)=>userContext.setName(e.target.value)} />        
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Email</Form.Label>
-        <Form.Control type="email" placeholder="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+        <Form.Control type="email" placeholder="email" value={email} onChange={(e)=>userContext.setEmail(e.target.value)}/>
       </Form.Group>
       
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Mobile</Form.Label>
-        <Form.Control type="text" placeholder="Number" value={mobile} onChange={(e)=>setMobile(e.target.value)}/>
+        <Form.Control type="text" placeholder="Number" value={mobile} onChange={(e)=>userContext.setMobile(e.target.value)}/>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Date Of Birth</Form.Label>
-        <Form.Control type="Date" placeholder="Password" value={dob} onChange={(e)=>setDob(e.target.value)}/>
+        <Form.Control type="Date" placeholder="Password" value={dob} onChange={(e)=>userContext.setDob(e.target.value)}/>
       </Form.Group>
 
-      <Button variant="primary"  onClick={()=>handleSubmit()}>
+      <Button variant="primary"  onClick={()=>userContext.handleSubmit()}>
         Submit
       </Button>
      

@@ -1,12 +1,16 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import Card from './Card'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
+import { UsersContext } from '../App';
 
-function Dashboard({users,setUsers}) {
+function Dashboard() {
   let navigate = useNavigate()
   
+  let userContext = useContext(UsersContext)//props drilling
+  console.log('Context',userContext)
+
   let [data,setData]=useState([
     { tittle:"Earning(Monthly)",
     value:"$40,000",
@@ -79,7 +83,7 @@ function Dashboard({users,setUsers}) {
       </thead>
       <tbody>
        {
-       users.map((e,i)=>{
+       userContext.users.map((e,i)=>{
            return <tr key={i}>
            <td>{i+1}</td>
            <td>{e.name}</td>
@@ -91,9 +95,9 @@ function Dashboard({users,setUsers}) {
             <Button variant='primary' onClick={()=>navigate(`/edit-user/${i}`)}>Edit</Button>
             &nbsp;&nbsp;
             <Button variant='danger' onClick={()=>{
-              let newArray=[...users]
+              let newArray=[...userContext.users]
               newArray.splice(i,1)
-              setUsers(newArray)
+              userContext.setUsers(newArray)
             }}>Delete</Button>
            </td>
            </tr>

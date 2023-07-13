@@ -10,6 +10,8 @@ import ResetPassword from './components/ResetPassword'
 import { BrowserRouter,Routes,Route,Navigate } from "react-router-dom";
 import { useState } from "react";
 
+export const UsersContext = React.createContext()//props drilling
+
 
 function App() {  
  let [users,setUsers]=useState([
@@ -42,12 +44,13 @@ function App() {
 
  
   return<>
+  <UsersContext.Provider value={{users,setUsers}}>
   <BrowserRouter>
   <div id="wrapper">
     <Sidebar/>
     <Routes>
-    <Route path="/dashboard" element={<Dashboard users={users} setUsers={setUsers}/>}/>
-    <Route path="/add-user" element={<AddUser users={users} setUsers={setUsers}/>}/>
+    <Route path="/dashboard" element={<Dashboard />}/>
+    <Route path="/add-user" element={<AddUser/>}/>
     <Route path="/edit-user/:id" element={<AddUser users={users} setUsers={setUsers}/>}/>
     <Route path="/profile" element={<Profile/>}>
       <Route path="details" element={<ProfileDetails/>}/>
@@ -59,6 +62,7 @@ function App() {
     </Routes>
     </div>
     </BrowserRouter>
+    </UsersContext.Provider>
   </>
 }
 
