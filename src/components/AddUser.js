@@ -3,12 +3,11 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState,useEffect ,useContext} from 'react';
 import { useNavigate ,useParams} from 'react-router-dom';
-import { UsersContext } from '../App';
-
+import { UsersContext } from '../Context/UsersContextComponent';
 
 function AddUser({users,setUsers}) {
   let userContext=useContext(UsersContext)
-  console.log('Context',userContext)
+  
 
   let navigate = useNavigate()
   let params = useParams()
@@ -47,10 +46,10 @@ function AddUser({users,setUsers}) {
 
 useEffect(()=>{
   {if(params.id!==undefined){
-    setName(users[params.id].name)
-    setEmail(users[params.id].email)
-    setMobile(users[params.id].mobile)
-    setDob(users[params.id].dob)
+    setName(userContext.users[params.id].name)
+    setEmail(userContext.users[params.id].email)
+    setMobile(userContext.users[params.id].mobile)
+    setDob(userContext.users[params.id].dob)
     
  }}
   // else{

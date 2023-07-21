@@ -3,43 +3,17 @@ import Card from './Card'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
-import { UsersContext } from '../App';
+import { UsersContext } from '../Context/UsersContextComponent';
+import { DashboardContext } from '../Context/DashboardContextComponent';
+
 
 function Dashboard() {
-  
+  let navigate = useNavigate()
   
   let userContext = useContext(UsersContext)//props drilling
-  console.log('Context',userContext)
+  let dashboardContext = useContext(DashboardContext)
 
-  let [data,setData]=useState([
-    { tittle:"Earning(Monthly)",
-    value:"$40,000",
-    color:"primary",
-    icon:"calendar",
-    isProgress:false
-     },
-   { tittle:"Earning(Annual)",
-    value:"$60,000",
-    color:"success",
-    icon:"dollar-sign",       
-    isProgress:false
-   },
-   { tittle:"Task",
-    value:"50%",
-    color:"info",
-    icon:"clipboard-list",
-    isProgress:true
-   },
-   { tittle:"Pending Request",
-    value:"18",
-    color:"warning",
-    icon:"comments",
-    isProgress:false
-   }
-  ]) 
- 
-let navigate = useNavigate()
-
+  
    return <>
   <div id="content-wrapper" className="d-flex flex-column">
 
@@ -62,7 +36,7 @@ let navigate = useNavigate()
         <div className="row">
 
         {
-           data.map((e,i)=>{
+          dashboardContext.data.map((e,i)=>{
             return <Card key={i}
             input={e}
            />

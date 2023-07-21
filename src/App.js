@@ -8,50 +8,35 @@ import PendingRequest from "./components/PendingRequest";
 import ProfileDetails from './components/ProfileDetails'
 import ResetPassword from './components/ResetPassword'
 import { BrowserRouter,Routes,Route,Navigate } from "react-router-dom";
-import { useState } from "react";
-
-export const UsersContext = React.createContext()//props drilling
-
+import UsersContextComponent from "./Context/UsersContextComponent";
+import DashboardContextComponent from "./Context/DashboardContextComponent";
 
 function App() {  
- let [users,setUsers]=useState([
-  {
-    name:"jana",
-    email:"jana@gmail.com",
-    mobile:"9294870987",
-    dob:"2001-12-09"
-  },
-  {
-    name:"ajay",
-    email:"ajay@gmail.com",
-    mobile:"9294870987",
-    dob:"2001-12-09"
-  },
-  {
-    name:"kabilan",
-    email:"kabilan@gmail.com",
-    mobile:"9294870987",
-    dob:"2001-12-09"
-  },
-  {
-    name:"arun",
-    email:"arun@gmail.com",
-    mobile:"9294870987",
-    dob:"2001-12-09"
-  } 
-  
- ])
+ 
 
  
   return<>
-  <UsersContext.Provider value={{users,setUsers}}>
+  
   <BrowserRouter>
   <div id="wrapper">
     <Sidebar/>
     <Routes>
-    <Route path="/dashboard" element={<Dashboard />}/>
-    <Route path="/add-user" element={<AddUser users={users} setUsers={setUsers}/>}/>
-    <Route path="/edit-user/:id" element={<AddUser users={users} setUsers={setUsers}/>}/>
+    <Route path="/dashboard" element={
+    <DashboardContextComponent>
+      <UsersContextComponent>
+      <Dashboard/>
+    </UsersContextComponent>
+    </DashboardContextComponent> }/>
+    <Route path="/add-user" element={
+      <UsersContextComponent>
+        <AddUser />
+      </UsersContextComponent>
+    }/>
+    <Route path="/edit-user/:id" element={
+      <UsersContextComponent>
+        <AddUser />
+      </UsersContextComponent>
+    }/>
     <Route path="/profile" element={<Profile/>}>
       <Route path="details" element={<ProfileDetails/>}/>
       <Route path="reset-password" element={<ResetPassword/>}/>
@@ -62,7 +47,7 @@ function App() {
     </Routes>
     </div>
     </BrowserRouter>
-    </UsersContext.Provider>
+    
   </>
 }
 
