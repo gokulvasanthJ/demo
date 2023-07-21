@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { UsersContext } from '../App';
 
 function Dashboard() {
-  let navigate = useNavigate()
+  
   
   let userContext = useContext(UsersContext)//props drilling
   console.log('Context',userContext)
@@ -37,6 +37,9 @@ function Dashboard() {
     isProgress:false
    }
   ]) 
+ 
+let navigate = useNavigate()
+
    return <>
   <div id="content-wrapper" className="d-flex flex-column">
 

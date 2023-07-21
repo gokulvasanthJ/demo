@@ -16,14 +16,14 @@ export const UsersContext = React.createContext()//props drilling
 function App() {  
  let [users,setUsers]=useState([
   {
-    name:"ajay",
-    email:"ajay@gmail.com",
+    name:"jana",
+    email:"jana@gmail.com",
     mobile:"9294870987",
     dob:"2001-12-09"
   },
   {
-    name:"jana",
-    email:"jana@gmail.com",
+    name:"ajay",
+    email:"ajay@gmail.com",
     mobile:"9294870987",
     dob:"2001-12-09"
   },
@@ -50,7 +50,7 @@ function App() {
     <Sidebar/>
     <Routes>
     <Route path="/dashboard" element={<Dashboard />}/>
-    <Route path="/add-user" element={<AddUser/>}/>
+    <Route path="/add-user" element={<AddUser users={users} setUsers={setUsers}/>}/>
     <Route path="/edit-user/:id" element={<AddUser users={users} setUsers={setUsers}/>}/>
     <Route path="/profile" element={<Profile/>}>
       <Route path="details" element={<ProfileDetails/>}/>
