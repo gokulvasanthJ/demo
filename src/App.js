@@ -10,6 +10,10 @@ import ResetPassword from './components/ResetPassword'
 import { BrowserRouter,Routes,Route,Navigate } from "react-router-dom";
 import UsersContextComponent from "./Context/UsersContextComponent";
 import DashboardContextComponent from "./Context/DashboardContextComponent";
+import UseRef from "./components/Hooks/UseRef";
+import UseMemo from "./components/Hooks/UseMemo";
+import UseReducer from "./components/Hooks/UseReducer";
+import Hooks from "./components/Hooks/Hooks";
 
 function App() {  
  
@@ -43,6 +47,11 @@ function App() {
       </Route>
     <Route path="/task" element={<Task/>}/>
     <Route path="/pendingrequest" element={<PendingRequest/>}/>
+    <Route path="/hooks" element={<Hooks/>}>
+      <Route path="useref" element={<UseRef/>}/>
+      <Route path="usememo" element={<UseMemo/>}/>
+      <Route path="usereducer" element={<UseReducer/>}/>
+    </Route>
     <Route path="*" element={<Navigate to="/dashboard"/>}/>
     </Routes>
     </div>

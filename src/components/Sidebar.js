@@ -1,8 +1,13 @@
 import React from 'react'
 import { Link,useNavigate} from 'react-router-dom'
-
+import UseLogout from './Hooks/UseLogout'
+import Button from 'react-bootstrap/esm/Button'
 function Sidebar() {
-    let navi=useNavigate()
+    let logout = UseLogout()//This is for custom hook
+    let navigate=useNavigate()
+    // let handleLogout = ()=>{
+    //     logout()
+    // }
   return<>
    {/* <!-- Sidebar --> */}
         <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -56,25 +61,26 @@ function Sidebar() {
             </li>
             </Link>
 
-            
-            <li className="nav-item" onClick={()=>navi('/task')}>
+
+            <Link to="/hooks">
+            <li className="nav-item">
+                <div className="nav-link collapsed" href="javascript(void)" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa-solid fa-rotate"></i>
+                    <span>Hooks</span>
+                </div>             
+            </li>
+            </Link>
+
+
+            <li className="nav-item" onClick={()=>navigate('/task')}>
                 <div className="nav-link collapsed" href="javascript(void)" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fa-solid fa-list-check"></i>
                     <span>Task </span>
                 </div>             
             </li>                
-            
-
-            <Link to="/pendingrequest">
-            <li className="nav-item">
-                <div className="nav-link collapsed" href="javascript(void)" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fa-solid fa-rotate"></i>
-                    <span>PendingRequest</span>
-                </div>             
-            </li>
-            </Link>
+            <Button variant="danger" onClick={logout}>Logout</Button>
 
 
         </ul>
